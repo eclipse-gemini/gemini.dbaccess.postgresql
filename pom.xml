@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--#======================================================================= -->
+<!--# Copyright (c) 2017 Loetz GmbH&Co.KG -->
+<!--# All rights reserved. This program and the accompanying materials -->
+<!--# are made available under the terms of the Eclipse Public License 2.0  -->
+<!--# which accompanies this distribution, and is available at -->
+<!--# https://www.eclipse.org/legal/epl-2.0/    -->
+<!--#                                           -->
+<!--# SPDX-License-Identifier: EPL-2.0          -->
+<!--# -->
+<!--# Contributors: -->
+<!--# Loetz GmbH&Co.KG - initial API and implementation -->
+<!--#======================================================================= -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.eclipse.osbp.releng.maven</groupId>
+		<artifactId>org.eclipse.osbp.releng.maven.parent.tycho</artifactId>
+		<version>0.9.0-SNAPSHOT</version>
+	</parent>
+
+    <groupId>org.eclipse.osbp.gemini.dbaccess.postgresql</groupId>
+    <artifactId>org.eclipse.osbp.gemini.dbaccess.postgresql.aggregator</artifactId>
+	<packaging>pom</packaging>
+	<name>OSBP Gemini DBAccess for PostgreSQL Server</name>
+
+	<inceptionYear>2018</inceptionYear>
+
+	<url>${osbp.site.repository.url}</url>
+	<scm>
+		<url>${osbp.scm.url}</url>
+		<connection>${osbp.scm.connection}</connection>
+		<developerConnection>${osbp.scm.connection.dev}</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+	<distributionManagement>
+		<site>
+			<id>gh-pages</id>
+			<name>OSBP GitHub Pages</name>
+			<url>${distribution.site.url}</url>
+		</site>
+	</distributionManagement>
+
+	<repositories>
+	    <repository>
+            <id>OSBP local dependencies</id>
+            <url>file://${osbp.developer.home.repositories}${osbp.dependencies.repository.label}/neon/${osbp.build.branch}</url>
+            <layout>p2</layout>
+        </repository>
+	</repositories>
+
+	<modules>
+		<module>org.eclipse.gemini.dbaccess.postgresql</module>
+		<module>org.eclipse.gemini.dbaccess.postgresql.feature</module>
+	</modules>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<configuration>
+						<skip>true</skip>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>target-platform-configuration</artifactId>
+					<version>${tycho-version}</version>
+					<configuration>
+						<resolver>p2</resolver>
+						<pomDependencies>consider</pomDependencies>
+						<environments>
+							<environment>
+								<os>win32</os>
+								<ws>win32</ws>
+								<arch>x86_64</arch>
+							</environment>
+							<environment>
+								<os>linux</os>
+								<ws>gtk</ws>
+								<arch>x86</arch>
+							</environment>
+							<environment>
+								<os>linux</os>
+								<ws>gtk</ws>
+								<arch>x86_64</arch>
+							</environment>
+							<environment>
+								<os>macosx</os>
+								<ws>cocoa</ws>
+								<arch>x86_64</arch>
+							</environment>
+						</environments>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
